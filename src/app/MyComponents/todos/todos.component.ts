@@ -13,4 +13,9 @@ export class TodosComponent {
     this.todos.push(new Todo(2, "Learn React", "Learn React from scratch", false));
     this.todos.push(new Todo(3, "Learn Vue", "Learn Vue from scratch", true));
   }
+
+  todoDelete(todo: Todo){
+    const index = this.todos.indexOf(todo);
+    this.todos.splice(index, 1);
+  }
 }
