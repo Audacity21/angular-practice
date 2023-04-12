@@ -1,10 +1,14 @@
-<app-add-todo (todoAdd)="addTodo($event)"></app-add-todo>
-<h4>Your Todos</h4>
-<div *ngIf="todos.length == 0; else elseBlock">
-  <h5>No Todos to display</h5>
-</div>
-<ng-template #elseBlock>
-  <div *ngFor="let todo of todos; index as i">
-    <app-todo-item [todo]="todo" (deleteTodo)="todoDelete($event)" (todoCheckbox)="toggleTodo($event)"></app-todo-item>
+<div class="container">
+  <h3 class="text-center mb-3">Todos List by Audacity21</h3>
+  <app-add-todo (todoAdd)="addTodo($event)"></app-add-todo>
+  <h4>Your Todos</h4>
+  <div *ngIf="todos.length == 0; else elseBlock">
+    <h5>No Todos to display</h5>
   </div>
-</ng-template>
+  <ng-template #elseBlock>
+    <div *ngFor="let todo of todos; index as i">
+      <app-todo-item [todo]="todo" (deleteTodo)="todoDelete($event)" (todoCheckbox)="toggleTodo($event)"></app-todo-item>
+    </div>
+  </ng-template>
+</div>
+
