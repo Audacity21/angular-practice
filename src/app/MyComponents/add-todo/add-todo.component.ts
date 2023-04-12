@@ -7,19 +7,27 @@ import { Todo } from 'src/app/Todo';
   styleUrls: ['./add-todo.component.css']
 })
 export class AddTodoComponent {
+  index: any;
   @Input() public title: any;
   @Input() public desc: any;
   @Output() todoAdd: EventEmitter<Todo> = new EventEmitter(); 
 
-  constructor() { }
+  constructor() { 
+    this.index = localStorage.getItem('slno');
+    if(this.index == null){
+      this.index = 0;
+    }
+  }
 
   onSubmit() {
     const todo = {
-      sno: 8,
+      sno: this.index,
       title: this.title,
       desc: this.desc,
       active: true
     };
+    this.index++;
+    localStorage.setItem('slno', this.index);
     this.todoAdd.emit(todo);
   }
 }

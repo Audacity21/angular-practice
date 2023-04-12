@@ -7,19 +7,32 @@ import { Todo } from '../../Todo'
   styleUrls: ['./todos.component.css']
 })
 export class TodosComponent {
+  localItem: any;
   todos: Todo[] = []; // This is an array of Todo objects
   constructor() {
-    this.todos.push(new Todo(1, "Learn Angular", "Learn Angular from scratch", true));
-    this.todos.push(new Todo(2, "Learn React", "Learn React from scratch", false));
-    this.todos.push(new Todo(3, "Learn Vue", "Learn Vue from scratch", true));
+    this.localItem = localStorage.getItem('todos');
+    if(this.localItem == null){
+      this.todos = [];
+    }
+    else{
+      this.todos = JSON.parse(this.localItem);
+    }
   }
 
   addTodo(todo: Todo){
     this.todos.push(todo);
+    localStorage.setItem('todos', JSON.stringify(this.todos));
   }
 
   todoDelete(todo: Todo){
     const index = this.todos.indexOf(todo);
     this.todos.splice(index, 1);
+    localStorage.setItem('todos', JSON.stringify(this.todos));
+  }
+
+  toggleTodo(todo: Todo){
+    const index = this.todos.indexOf(todo);
+    this.todos[index].active = !this.todos[index].active;
+    localStorage.setItem('todos', JSON.stringify(this.todos));
   }
 }

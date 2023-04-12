@@ -11,6 +11,7 @@ export class TodoItemComponent {
   todo!: Todo;
 
   @Output() deleteTodo: EventEmitter<Todo> = new EventEmitter();
+  @Output() todoCheckbox: EventEmitter<Todo> = new EventEmitter();
 
   constructor() {
   }
@@ -18,6 +19,10 @@ export class TodoItemComponent {
   onDelete(todo: Todo){
     this.deleteTodo.emit(todo);
     console.log("Delete");
+  }
+
+  onCheckboxClick(todo: Todo){
+    this.todoCheckbox.emit(todo);
   }
 }
 
